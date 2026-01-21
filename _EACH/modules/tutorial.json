@@ -1,0 +1,28 @@
+{
+"tutorial_module": {
+"id": "tutorial_module",
+"title": "Tutorial Module",
+"subtitle": "Used as an example",
+"icon": "icons/modules/placeholder.svg",
+"settings": {
+
+    "Keep below/above cutoff": {
+        "formtype": "ChoiceField",
+        "options": {"Keep below cutoff": ["Internal_code_for_option_1"],
+                    "Keep above cutoff": ["Internal_code_for_option_2"]
+                    }
+                },
+
+    
+    
+    "Weight cutoff (kDa)": {
+        "formtype": "DecimalField",
+        "default": 75.0,
+        "min": 0.0,
+        "max": 300.0,
+        "step": 0.1}
+
+
+        }
+    }
+}

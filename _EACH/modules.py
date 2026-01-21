@@ -45,11 +45,33 @@ def select(moduleIdentifier,selectedSettings,moduleData):
             # Does not perform any real processing; for demonstration only.
             proteins = exampleModule(moduleIdentifier,selectedSettings,moduleData)
             return virtualSDSPage_2DGaussian(proteins)
+        case "tutorial_module":
+            proteins = tutorial_module(moduleIdentifier,selectedSettings,moduleData)
+            return virtualSDSPage_2DGaussian(proteins)
         case _: # Add new modules above 
             # Do not add modules below
             raise NotImplementedError(f"Module: {moduleIdentifier} is not implemented yet.")
         
 
+
+def tutorial_module(moduleIdentifier, selectedSettings, moduleData):
+    # Get the cutoff value (0-300 kDa)
+    chosenCutoff = extractSetting(settingName="Weight cutoff (kDa)",
+                                  moduleIdentifier=moduleIdentifier,
+                                  selectedSettings=selectedSettings,
+                                  moduleData=moduleData)
+    
+    # Get the user's choice: deplete above or below?
+    depleteAboveOrBelow = extractSetting(settingName="Keep below/above cutoff",
+                                 moduleIdentifier=moduleIdentifier,
+                                  selectedSettings=selectedSettings,
+                                  moduleData=moduleData)
+    print(chosenCutoff)
+    return Protein.getAllProteins()
+
+for protein in Protein.getAllProteins():
+    if protein.weight > chosenCutoff: protein.set_abundance(0.0)
+  
 def fasta_input(moduleIdentifier, selectedSettings,moduleData):
     """
     Load proteins from a selected FASTA file and convert sequences into Protein objects.
@@ -249,6 +271,9 @@ def exampleModule(moduleIdentifier,selectedSettings,moduleData):
     print(f"Character field value: {charFieldValue}")
     
     
+
+
     return Protein.getAllProteins()
+
 
 
